@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://0kkkxvtnikuh"]
+
+[ext_resource type="Script" path="res://tscn/player.gd" id="1_k5hne"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6ue1"]
+size = Vector2(20, 100)
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_k5hne")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 20, 0, 20, 100, 0, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 50)
+shape = SubResource("RectangleShape2D_k6ue1")
+
+[node name="auto_move_timer" type="Timer" parent="."]
+wait_time = 0.3
+
+[connection signal="timeout" from="auto_move_timer" to="." method="_on_auto_move_timer_timeout"]

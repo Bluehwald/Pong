@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://lyj0t4xa0mgp"
+path="res://.godot/imported/Will 2 Pwr - half.cool.ogg-68153feefb1a87178c7fe5352eb9019a.oggvorbisstr"
+
+[deps]
+
+source_file="res://art/Will 2 Pwr - half.cool.ogg"
+dest_files=["res://.godot/imported/Will 2 Pwr - half.cool.ogg-68153feefb1a87178c7fe5352eb9019a.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

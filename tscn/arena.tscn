@@ -1,0 +1,134 @@
+[gd_scene load_steps=13 format=3 uid="uid://bqbudj5bawnof"]
+
+[ext_resource type="Script" path="res://tscn/arena.gd" id="1_aqn5v"]
+[ext_resource type="PackedScene" uid="uid://b4jgttr8aseno" path="res://tscn/wall.tscn" id="1_w0xob"]
+[ext_resource type="PackedScene" uid="uid://ddrfvdiwkswu4" path="res://tscn/background.tscn" id="2_vbb1m"]
+[ext_resource type="PackedScene" uid="uid://0kkkxvtnikuh" path="res://tscn/player.tscn" id="4_4tsoc"]
+[ext_resource type="PackedScene" uid="uid://bhgky1t7p7kx4" path="res://tscn/hud.tscn" id="5_a275k"]
+[ext_resource type="AudioStream" uid="uid://lyj0t4xa0mgp" path="res://art/Will 2 Pwr - half.cool.ogg" id="7_jdd0b"]
+[ext_resource type="AudioStream" uid="uid://dsr5e1hy4n1tu" path="res://art/powerUp.wav" id="8_3qcyu"]
+[ext_resource type="AudioStream" uid="uid://pu23ktylx1ke" path="res://art/start.wav" id="8_kiggy"]
+[ext_resource type="FontFile" uid="uid://dc06i08sfg637" path="res://art/70SdiscopersonaluseBold-w14z2.otf" id="8_xl3jv"]
+[ext_resource type="PackedScene" uid="uid://duhthw2f8un12" path="res://tscn/paused_screen.tscn" id="10_ccsvb"]
+[ext_resource type="PackedScene" uid="uid://buvwmmfxypdpj" path="res://tscn/ball.tscn" id="10_u26i1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmdwq"]
+size = Vector2(20, 1080)
+
+[node name="arena" type="Node2D"]
+script = ExtResource("1_aqn5v")
+
+[node name="background" parent="." instance=ExtResource("2_vbb1m")]
+
+[node name="divider" type="Polygon2D" parent="."]
+color = Color(1, 0.517647, 0.992157, 1)
+polygon = PackedVector2Array(957, 0, 963, 0, 963, 1080, 957, 1080)
+
+[node name="upper_wall" parent="." instance=ExtResource("1_w0xob")]
+
+[node name="lower_wall" parent="." instance=ExtResource("1_w0xob")]
+position = Vector2(0, 1060)
+
+[node name="title_parent" type="Node" parent="."]
+
+[node name="title_timer" type="Timer" parent="title_parent"]
+wait_time = 1.5
+
+[node name="title_label" type="RichTextLabel" parent="title_parent"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -566.0
+offset_top = -198.0
+offset_right = 566.0
+offset_bottom = 198.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_outline_size = 3
+theme_override_constants/outline_size = 49
+theme_override_font_sizes/normal_font_size = 305
+bbcode_enabled = true
+text = "P O N G"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="win_label" type="Label" parent="title_parent"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 210.0
+offset_right = 20.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_xl3jv")
+theme_override_font_sizes/font_size = 81
+text = "L e f t   P l a y e r   h a s   w o n"
+
+[node name="ball" parent="." instance=ExtResource("10_u26i1")]
+position = Vector2(960, 540)
+
+[node name="player_left" parent="." instance=ExtResource("4_4tsoc")]
+position = Vector2(0, 490)
+scale = Vector2(1, 2)
+
+[node name="player_right" parent="." instance=ExtResource("4_4tsoc")]
+position = Vector2(1900, 490)
+scale = Vector2(1, 2)
+
+[node name="background_music" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(960, 540)
+stream = ExtResource("7_jdd0b")
+autoplay = true
+
+[node name="play_start_game" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_kiggy")
+
+[node name="score_sound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(960, 540)
+stream = ExtResource("8_3qcyu")
+
+[node name="area_out_player_left_collision" type="Area2D" parent="."]
+
+[node name="out_player_left_collision" type="CollisionShape2D" parent="area_out_player_left_collision"]
+position = Vector2(-10, 540)
+shape = SubResource("RectangleShape2D_vmdwq")
+
+[node name="area_out_player_right_collision2" type="Area2D" parent="."]
+
+[node name="out_player_right_collision" type="CollisionShape2D" parent="area_out_player_right_collision2"]
+position = Vector2(1930, 540)
+shape = SubResource("RectangleShape2D_vmdwq")
+
+[node name="score_left" type="Label" parent="."]
+offset_left = 50.0
+offset_top = 140.0
+offset_right = 90.0
+offset_bottom = 194.0
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="score_right" type="Label" parent="."]
+offset_left = 1840.0
+offset_top = 140.0
+offset_right = 1880.0
+offset_bottom = 194.0
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="paused_screen" parent="." instance=ExtResource("10_ccsvb")]
+
+[node name="HUD" parent="." instance=ExtResource("5_a275k")]
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[connection signal="timeout" from="title_parent/title_timer" to="." method="_on_title_timer_timeout"]
+[connection signal="area_entered" from="area_out_player_left_collision" to="." method="_on_area_out_player_left_collision_area_entered"]
+[connection signal="area_entered" from="area_out_player_right_collision2" to="." method="_on_area_out_player_right_collision_2_area_entered"]
